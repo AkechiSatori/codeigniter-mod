@@ -568,17 +568,12 @@ if (!function_exists('_error_handler')) {
         // Should we display the error?
 
         if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
-            if ($severity === E_PARSE) {
-                $_error->show_php_error($severity, $message, $filepath, $line);
-            } else {
-                $GLOBALS['_php_error'][] = [
-                    'level' => $severity,
-                    'message' => $message,
-                    'file' => $filepath,
-                    'line' => $line,
-                ];
-            }
-
+            $GLOBALS['_php_error'][] = [
+                'level' => $severity,
+                'message' => $message,
+                'file' => $filepath,
+                'line' => $line,
+            ];
         }
 
         // If the error is fatal, the execution of the script should be stopped because
