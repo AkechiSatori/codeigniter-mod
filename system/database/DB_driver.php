@@ -1712,15 +1712,17 @@ abstract class CI_DB_driver {
 				if (strpos($call['file'], BASEPATH.'database') === FALSE && strpos($call['class'], 'Loader') === FALSE)
 				{
 					// Found it - use a relative path for safety
-					$message[] = 'Filename: '.str_replace(array(APPPATH, BASEPATH), '', $call['file']);
-					$message[] = 'Line Number: '.$call['line'];
+					$message[] = [
+                        			'file' => str_replace(array(APPPATH, BASEPATH), '', $call['file']),
+                        			'line' => $call['line'],
+                    			];
 					break;
 				}
 			}
 		}
-
-		$error =& load_class('Exceptions', 'core');
-		echo $error->show_error($heading, $message, 'error_db');
+		echo json_encode(['code' => 500, 'heading' => $heading, 'message' => $message]);
+		//$error =& load_class('Exceptions', 'core');
+		//echo $error->show_error($heading, $message, 'error_db');
 		exit(8); // EXIT_DATABASE
 	}
 
