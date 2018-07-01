@@ -359,19 +359,21 @@ if (!function_exists('show_error')) {
      * @param    string
      * @return    void
      */
-    function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
+    function show_error($status_code = 500,$message, $heading = 'An Error Was Encountered')
     {
-        $status_code = abs($status_code);
-        if ($status_code < 100) {
-            $exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
-            $status_code = 500;
-        } else {
-            $exit_status = 1; // EXIT_ERROR
-        }
-
-        $_error = &load_class('Exceptions', 'core');
-        echo $_error->show_error($heading, $message, 'error_general', $status_code);
-        exit($exit_status);
+        // $status_code = abs($status_code);
+        // if ($status_code < 100) {
+        //     $exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
+        //     $status_code = 500;
+        // } else {
+        //     $exit_status = 1; // EXIT_ERROR
+        // }
+        header('Content-Type: application/json');
+        echo json_encode([
+          'code' => $status_code,
+          'message' => $message
+        ]);
+        exit();
     }
 }
 

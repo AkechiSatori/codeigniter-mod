@@ -1,11 +1,11 @@
 <?php
-class test extends CI_Controller
+class test extends MY_Controller
 {
     public function w($id)
     {
         return [
             'code' => 0,
-            'id' => $id,
+            'id' => $id
         ];
     }
 }
