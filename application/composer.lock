@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a00a8fd31b47efefbe194340e8e68c41",
+    "packages": [
+        {
+            "name": "komeiji-satori/curl",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/komeiji-satori/curl.git",
+                "reference": "af0aa07d8c44be298cba0c15a393d11e4d10b6a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/komeiji-satori/curl/af0aa07d8c44be298cba0c15a393d11e4d10b6a8.zip",
+                "reference": "af0aa07d8c44be298cba0c15a393d11e4d10b6a8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/cURL.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Satori",
+                    "email": "i@ttt.moe"
+                }
+            ],
+            "description": "一个轻量级的PHP网络操作类，实现GET、POST、UPLOAD、DOWNLOAD常用操作，出错自动重试，支持链式写法",
+            "homepage": "https://github.com/komeiji-satori/curl",
+            "keywords": [
+                "PHP cURL",
+                "curl download",
+                "curl library",
+                "curl lightweight",
+                "curl post",
+                "curl upload"
+            ],
+            "time": "2018-06-26T07:29:08+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "komeiji-satori/curl": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "komeiji-satori/curl",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/komeiji-satori/curl.git",
+            "reference": "af0aa07d8c44be298cba0c15a393d11e4d10b6a8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/komeiji-satori/curl/af0aa07d8c44be298cba0c15a393d11e4d10b6a8.zip",
+            "reference": "af0aa07d8c44be298cba0c15a393d11e4d10b6a8",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.6"
+        },
+        "time": "2018-06-26T07:29:08+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "src/cURL.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Satori",
+                "email": "i@ttt.moe"
+            }
+        ],
+        "description": "一个轻量级的PHP网络操作类，实现GET、POST、UPLOAD、DOWNLOAD常用操作，出错自动重试，支持链式写法",
+        "homepage": "https://github.com/komeiji-satori/curl",
+        "keywords": [
+            "PHP cURL",
+            "curl download",
+            "curl library",
+            "curl lightweight",
+            "curl post",
+            "curl upload"
+        ]
+    }
+]

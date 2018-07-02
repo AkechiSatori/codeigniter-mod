@@ -1,0 +1,5 @@
+{
+    "require": {
+        "komeiji-satori/curl": "dev-master"
+    }
+}
