@@ -1396,6 +1396,30 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		return $this;
 	}
+	
+	public function increment($key, $value = 1) {
+        	$key = $this->_object_to_array($key);
+		if (!is_array($key)) {
+            		$key = array($key => $value);
+        	}
+        	foreach ($key as $k => $v) {
+            		$this->qb_set[$this->protect_identifiers($k, false, false)] = "$k+$v";
+        	}
+        	return $this;
+    	}
+	
+    	public function decrement($key, $value = 1) {
+        	$key = $this->_object_to_array($key);
+
+       		if (!is_array($key)) {
+            		$key = array($key => $value);
+        	}
+
+        	foreach ($key as $k => $v) {
+            		$this->qb_set[$this->protect_identifiers($k, false, false)] = "$k-$v";
+        	}
+        	return $this;
+    	}
 
 	// --------------------------------------------------------------------
 
