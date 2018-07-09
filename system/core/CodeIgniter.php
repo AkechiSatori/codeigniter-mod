@@ -455,7 +455,12 @@ foreach ($controller_params as $param) {
         if ($param->isDefaultValueAvailable()) {
             $context_args[] = $param->getDefaultValue();
         } else {
-            $context_args[] = null;
+            if ($CFG->config['strict_function_params']) {
+                echo json_encode(['code' => 500, 'message' => 'Params `' . $param->getName() . "` Not Required"]);
+                exit();
+            } else {
+                $context_args[] = null;
+            }
         }
     } else {
         $context_args[] = !strlen($vars[$param->getName()]) == 0 ? $vars[$param->getName()] : null;
