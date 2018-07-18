@@ -463,7 +463,11 @@ foreach ($controller_params as $param) {
             }
         }
     } else {
-        $context_args[] = !strlen($vars[$param->getName()]) == 0 ? $vars[$param->getName()] : null;
+        if (!$param->isArray()) {
+            $context_args[] = !strlen($vars[$param->getName()]) == 0 ? $vars[$param->getName()] : null;
+        } else {
+            $context_args[] = is_array($vars[$param->getName()]) ? $vars[$param->getName()] : [];
+        }
 
     }
 }
