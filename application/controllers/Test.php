@@ -1,11 +1,12 @@
 <?php
 class test extends MY_Controller
 {
-    public function w($id)
+    public function w(int $id, string $str = 'meow')
     {
         return [
             'code' => 0,
-            'id' => $id
+            'id' => $id,
+            'str' => $str,
         ];
     }
 }
