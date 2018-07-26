@@ -330,6 +330,9 @@ $BM->mark('loading_time:_base_classes_end');
 $e404 = false;
 $class = ucfirst($RTR->class);
 $_fileinfo = pathinfo($RTR->method);
+if (is_cli()) {
+    $CFG->config['rewrite_extension'] = null;
+}
 if (!is_null($CFG->config['rewrite_extension'])) {
     if ($_fileinfo['extension'] == $CFG->config['rewrite_extension']) {
         $method = pathinfo($RTR->method)['filename'];
