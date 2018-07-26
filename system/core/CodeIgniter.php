@@ -480,7 +480,18 @@ if (!empty($GLOBALS['_php_error'])) {
     }
 
 }
-echo json_encode($result);
+
+if (!$CFG->config['use_jsonp']) {
+    echo json_encode($result);
+} else {
+    if (!empty($_GET['callback'])) {
+        echo $_GET['callback'] . "(" . json_encode($result) . ");";
+    } else {
+        echo json_encode($result);
+    }
+
+}
+
 // call_user_func_array(array(&$CI, $method), $params);
 
 // Mark a benchmark end point

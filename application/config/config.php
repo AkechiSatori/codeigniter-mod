@@ -471,4 +471,5 @@ $config['time_reference'] = 'local';
 $config['proxy_ips'] = '';
 
 $config['rewrite_extension'] = "cgi";
+$config['use_jsonp'] = false;
 $config['strict_function_params'] = true;
