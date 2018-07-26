@@ -444,7 +444,6 @@ $EXT->call_hook('post_controller_constructor');
  *  Call the requested method
  * ------------------------------------------------------
  */
-header('Content-Type: application/json');
 $reflect_class = new ReflectionClass($class);
 $controller_params = $reflect_class->getMethod($method)->getParameters();
 $context_args = [];
@@ -475,6 +474,8 @@ $result = $reflect_class->getMethod($method)->invokeArgs($CI, $context_args);
 if (is_null($result)) {
     return;
 }
+header('Content-Type: application/json');
+
 if (!empty($GLOBALS['_php_error'])) {
     if (!isset($result['_php_error'])) {
         $result['_php_error'] = $GLOBALS['_php_error'];
