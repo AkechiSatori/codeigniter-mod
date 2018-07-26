@@ -472,6 +472,9 @@ foreach ($controller_params as $param) {
     }
 }
 $result = $reflect_class->getMethod($method)->invokeArgs($CI, $context_args);
+if (is_null($result)) {
+    return;
+}
 if (!empty($GLOBALS['_php_error'])) {
     if (!isset($result['_php_error'])) {
         $result['_php_error'] = $GLOBALS['_php_error'];
