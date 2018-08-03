@@ -458,6 +458,7 @@ foreach ($controller_params as $param) {
             $context_args[] = $param->getDefaultValue();
         } else {
             if ($CFG->config['strict_function_params']) {
+                header('Content-Type: application/json');
                 echo json_encode(['code' => 500, 'message' => 'Params `' . $param->getName() . "` Required"]);
                 exit();
             } else {
