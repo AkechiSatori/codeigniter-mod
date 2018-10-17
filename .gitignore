@@ -1,2 +1,2 @@
-
-application/vendor/komeiji-satori/curl
+/vendor/
+vendor/.git
