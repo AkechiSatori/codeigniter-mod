@@ -63,11 +63,11 @@ const CI_VERSION = '3.2.0-dev';
  * ------------------------------------------------------
  */
 if (file_exists(APPPATH . 'config/' . ENVIRONMENT . '/constants.php')) {
-    require_once APPPATH . 'config/' . ENVIRONMENT . '/constants.php';
+	require_once APPPATH . 'config/' . ENVIRONMENT . '/constants.php';
 }
 
 if (file_exists(APPPATH . 'config/constants.php')) {
-    require_once APPPATH . 'config/constants.php';
+	require_once APPPATH . 'config/constants.php';
 }
 
 /*
@@ -103,7 +103,7 @@ register_shutdown_function('_shutdown_handler');
  * hurt to load it here.
  */
 if (!empty($assign_to_config['subclass_prefix'])) {
-    get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
+	get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
 }
 
 /*
@@ -112,15 +112,15 @@ if (!empty($assign_to_config['subclass_prefix'])) {
  * ------------------------------------------------------
  */
 if ($composer_autoload = config_item('composer_autoload')) {
-    if ($composer_autoload === true) {
-        file_exists(APPPATH . 'vendor/autoload.php')
-        ? require_once APPPATH . 'vendor/autoload.php'
-        : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but ' . APPPATH . 'vendor/autoload.php was not found.');
-    } elseif (file_exists($composer_autoload)) {
-        require_once $composer_autoload;
-    } else {
-        log_message('error', 'Could not find the specified $config[\'composer_autoload\'] path: ' . $composer_autoload);
-    }
+	if ($composer_autoload === true) {
+		file_exists(APPPATH . 'vendor/autoload.php')
+		? require_once APPPATH . 'vendor/autoload.php'
+		: log_message('error', '$config[\'composer_autoload\'] is set to TRUE but ' . APPPATH . 'vendor/autoload.php was not found.');
+	} elseif (file_exists($composer_autoload)) {
+		require_once $composer_autoload;
+	} else {
+		log_message('error', 'Could not find the specified $config[\'composer_autoload\'] path: ' . $composer_autoload);
+	}
 }
 
 /*
@@ -146,9 +146,9 @@ $CFG = &load_class('Config', 'core');
 
 // Do we have any manually set config items in the index.php file?
 if (isset($assign_to_config) && is_array($assign_to_config)) {
-    foreach ($assign_to_config as $key => $value) {
-        $CFG->set_item($key, $value);
-    }
+	foreach ($assign_to_config as $key => $value) {
+		$CFG->set_item($key, $value);
+	}
 }
 
 /*
@@ -183,30 +183,30 @@ $charset = strtoupper(config_item('charset'));
 ini_set('default_charset', $charset);
 
 if (extension_loaded('mbstring')) {
-    define('MB_ENABLED', true);
-    // mbstring.internal_encoding is deprecated starting with PHP 5.6
-    // and it's usage triggers E_DEPRECATED messages.
-    @ini_set('mbstring.internal_encoding', $charset);
-    // This is required for mb_convert_encoding() to strip invalid characters.
-    // That's utilized by CI_Utf8, but it's also done for consistency with iconv.
-    mb_substitute_character('none');
+	define('MB_ENABLED', true);
+	// mbstring.internal_encoding is deprecated starting with PHP 5.6
+	// and it's usage triggers E_DEPRECATED messages.
+	@ini_set('mbstring.internal_encoding', $charset);
+	// This is required for mb_convert_encoding() to strip invalid characters.
+	// That's utilized by CI_Utf8, but it's also done for consistency with iconv.
+	mb_substitute_character('none');
 } else {
-    define('MB_ENABLED', false);
+	define('MB_ENABLED', false);
 }
 
 // There's an ICONV_IMPL constant, but the PHP manual says that using
 // iconv's predefined constants is "strongly discouraged".
 if (extension_loaded('iconv')) {
-    define('ICONV_ENABLED', true);
-    // iconv.internal_encoding is deprecated starting with PHP 5.6
-    // and it's usage triggers E_DEPRECATED messages.
-    @ini_set('iconv.internal_encoding', $charset);
+	define('ICONV_ENABLED', true);
+	// iconv.internal_encoding is deprecated starting with PHP 5.6
+	// and it's usage triggers E_DEPRECATED messages.
+	@ini_set('iconv.internal_encoding', $charset);
 } else {
-    define('ICONV_ENABLED', false);
+	define('ICONV_ENABLED', false);
 }
 
 if (is_php('5.6')) {
-    ini_set('php.internal_encoding', $charset);
+	ini_set('php.internal_encoding', $charset);
 }
 
 /*
@@ -254,7 +254,7 @@ $OUT = &load_class('Output', 'core');
  * ------------------------------------------------------
  */
 if ($EXT->call_hook('cache_override') === false && $OUT->_display_cache($CFG, $URI) === true) {
-    exit;
+	exit;
 }
 
 /*
@@ -294,13 +294,12 @@ require_once BASEPATH . 'core/Controller.php';
  *
  * @return CI_Controller
  */
-function &get_instance()
-{
-    return CI_Controller::get_instance();
+function &get_instance() {
+	return CI_Controller::get_instance();
 }
 
 if (file_exists(APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controller.php')) {
-    require_once APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controller.php';
+	require_once APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controller.php';
 }
 
 // Set a mark point for benchmarking
@@ -331,91 +330,91 @@ $e404 = false;
 $class = ucfirst($RTR->class);
 $_fileinfo = pathinfo($RTR->method);
 if (is_cli()) {
-    $CFG->config['rewrite_extension'] = null;
+	$CFG->config['rewrite_extension'] = null;
 }
 if (!is_null($CFG->config['rewrite_extension'])) {
-    if ($_fileinfo['extension'] == $CFG->config['rewrite_extension']) {
-        $method = pathinfo($RTR->method)['filename'];
-    } else {
-        $e404 = true;
-    }
+	if ($_fileinfo['extension'] == $CFG->config['rewrite_extension']) {
+		$method = pathinfo($RTR->method)['filename'];
+	} else {
+		$e404 = true;
+	}
 } else {
-    $method = $RTR->method;
+	$method = $RTR->method;
 }
 
 if (empty($class) or !file_exists(APPPATH . 'controllers/' . $RTR->directory . $class . '.php')) {
-    $e404 = true;
+	$e404 = true;
 } else {
-    require_once APPPATH . 'controllers/' . $RTR->directory . $class . '.php';
+	require_once APPPATH . 'controllers/' . $RTR->directory . $class . '.php';
 
-    if (!class_exists($class, false) or $method[0] === '_' or method_exists('CI_Controller', $method)) {
-        $e404 = true;
-    } elseif (method_exists($class, '_remap')) {
-        $params = array($method, array_slice($URI->rsegments, 2));
-        $method = '_remap';
-    } elseif (!method_exists($class, $method)) {
-        $e404 = true;
-    }
-    /**
-     * DO NOT CHANGE THIS, NOTHING ELSE WORKS!
-     *
-     * - method_exists() returns true for non-public methods, which passes the previous elseif
-     * - is_callable() returns false for PHP 4-style constructors, even if there's a __construct()
-     * - method_exists($class, '__construct') won't work because CI_Controller::__construct() is inherited
-     * - People will only complain if this doesn't work, even though it is documented that it shouldn't.
-     *
-     * ReflectionMethod::isConstructor() is the ONLY reliable check,
-     * knowing which method will be executed as a constructor.
-     */
-    elseif (!is_callable(array($class, $method))) {
-        $reflection = new ReflectionMethod($class, $method);
-        if (!$reflection->isPublic() or $reflection->isConstructor()) {
-            $e404 = true;
-        }
-    }
+	if (!class_exists($class, false) or $method[0] === '_' or method_exists('CI_Controller', $method)) {
+		$e404 = true;
+	} elseif (method_exists($class, '_remap')) {
+		$params = array($method, array_slice($URI->rsegments, 2));
+		$method = '_remap';
+	} elseif (!method_exists($class, $method)) {
+		$e404 = true;
+	}
+	/**
+	 * DO NOT CHANGE THIS, NOTHING ELSE WORKS!
+	 *
+	 * - method_exists() returns true for non-public methods, which passes the previous elseif
+	 * - is_callable() returns false for PHP 4-style constructors, even if there's a __construct()
+	 * - method_exists($class, '__construct') won't work because CI_Controller::__construct() is inherited
+	 * - People will only complain if this doesn't work, even though it is documented that it shouldn't.
+	 *
+	 * ReflectionMethod::isConstructor() is the ONLY reliable check,
+	 * knowing which method will be executed as a constructor.
+	 */
+	elseif (!is_callable(array($class, $method))) {
+		$reflection = new ReflectionMethod($class, $method);
+		if (!$reflection->isPublic() or $reflection->isConstructor()) {
+			$e404 = true;
+		}
+	}
 }
 
 if ($e404) {
-    if (!empty($RTR->routes['404_override'])) {
-        if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2) {
-            $error_method = 'index';
-        }
+	if (!empty($RTR->routes['404_override'])) {
+		if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2) {
+			$error_method = 'index';
+		}
 
-        $error_class = ucfirst($error_class);
+		$error_class = ucfirst($error_class);
 
-        if (!class_exists($error_class, false)) {
-            if (file_exists(APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php')) {
-                require_once APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php';
-                $e404 = !class_exists($error_class, false);
-            }
-            // Were we in a directory? If so, check for a global override
-            elseif (!empty($RTR->directory) && file_exists(APPPATH . 'controllers/' . $error_class . '.php')) {
-                require_once APPPATH . 'controllers/' . $error_class . '.php';
-                if (($e404 = !class_exists($error_class, false)) === false) {
-                    $RTR->directory = '';
-                }
-            }
-        } else {
-            $e404 = false;
-        }
-    }
+		if (!class_exists($error_class, false)) {
+			if (file_exists(APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php')) {
+				require_once APPPATH . 'controllers/' . $RTR->directory . $error_class . '.php';
+				$e404 = !class_exists($error_class, false);
+			}
+			// Were we in a directory? If so, check for a global override
+			elseif (!empty($RTR->directory) && file_exists(APPPATH . 'controllers/' . $error_class . '.php')) {
+				require_once APPPATH . 'controllers/' . $error_class . '.php';
+				if (($e404 = !class_exists($error_class, false)) === false) {
+					$RTR->directory = '';
+				}
+			}
+		} else {
+			$e404 = false;
+		}
+	}
 
-    // Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
-    if (!$e404) {
-        $class = $error_class;
-        $method = $error_method;
+	// Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
+	if (!$e404) {
+		$class = $error_class;
+		$method = $error_method;
 
-        $URI->rsegments = array(
-            1 => $class,
-            2 => $method,
-        );
-    } else {
-        show_404($RTR->directory . $class . '/' . $RTR->method);
-    }
+		$URI->rsegments = array(
+			1 => $class,
+			2 => $method,
+		);
+	} else {
+		show_404($RTR->directory . $class . '/' . $RTR->method);
+	}
 }
 
 if ($method !== '_remap') {
-    $params = array_slice($URI->rsegments, 2);
+	$params = array_slice($URI->rsegments, 2);
 }
 
 /*
@@ -451,52 +450,72 @@ $reflect_class = new ReflectionClass($class);
 $controller_params = $reflect_class->getMethod($method)->getParameters();
 $context_args = [];
 $vars = array_merge($_GET, $_POST);
-
+function toBool($var) {
+	if (!is_string($var)) {
+		return (bool) $var;
+	}
+	switch (strtolower($var)) {
+	case '1':
+	case 'true':
+		return true;
+	default:
+		return false;
+	}
+}
 foreach ($controller_params as $param) {
-    if (!in_array($param->getName(), array_keys($vars))) {
-        if ($param->isDefaultValueAvailable()) {
-            $context_args[] = $param->getDefaultValue();
-        } else {
-            if ($CFG->config['strict_function_params']) {
-                header('Content-Type: application/json');
-                echo json_encode(['code' => 500, 'message' => 'Params `' . $param->getName() . "` Required"]);
-                exit();
-            } else {
-                $context_args[] = null;
-            }
-        }
-    } else {
-        if (!$param->isArray()) {
-            $context_args[] = !strlen($vars[$param->getName()]) == 0 ? $vars[$param->getName()] : null;
-        } else {
-            $context_args[] = is_array($vars[$param->getName()]) ? $vars[$param->getName()] : [];
-        }
+	if (!in_array($param->getName(), array_keys($vars))) {
+		if ($param->isDefaultValueAvailable()) {
+			$context_args[] = $param->getDefaultValue();
+		} else {
+			if ($CFG->config['strict_function_params']) {
+				throw new Exception('Params `' . $param->getName() . "` Required", 500);
+			} else {
+				$context_args[] = null;
+			}
+		}
+	} else {
+		$vars_type = gettype($vars[$param->getName()]);
+		if ($param->isDefaultValueAvailable()) {
+			$function_default_field_type = gettype($param->getDefaultValue());
+			switch ($function_default_field_type) {
+			// case 'double':
+			// $vars[$param->getName()] = floatval($vars[$param->getName()]);
+			// break;
+			case 'boolean':
+				$vars[$param->getName()] = toBool($vars[$param->getName()]);
+				break;
+			case 'integer':
+				$vars[$param->getName()] = intval($vars[$param->getName()]);
+				break;
+			}
+		}
+		$context_args[] = $vars[$param->getName()];
 
-    }
+	}
 }
 $result = $reflect_class->getMethod($method)->invokeArgs($CI, $context_args);
 if (is_null($result)) {
-    return;
+	return;
 }
 header('Content-Type: application/json');
 
 if (!empty($GLOBALS['_php_error'])) {
-    if (!isset($result['_php_error'])) {
-        $result['_php_error'] = $GLOBALS['_php_error'];
-    } else {
-        $result['_php_error_' . md5(rand() . time())] = $_php_error;
-    }
+	if (!isset($result['_php_error'])) {
+		$result['_php_error'] = $GLOBALS['_php_error'];
+	} else {
+		$result['_php_error_' . md5(rand() . time())] = $_php_error;
+	}
 
 }
 
 if (!$CFG->config['use_jsonp']) {
-    echo json_encode($result);
+	echo json_encode($result);
 } else {
-    if (!empty($_GET['callback'])) {
-        echo $_GET['callback'] . "(" . json_encode($result) . ");";
-    } else {
-        echo json_encode($result);
-    }
+	if (!empty($_GET['callback'])) {
+		echo $_GET['callback'] . "(" . json_encode($result) . ");";
+	} else {
+		echo json_encode($result);
+	}
 
 }
 
@@ -518,7 +537,7 @@ $EXT->call_hook('post_controller');
  * ------------------------------------------------------
  */
 if ($EXT->call_hook('display_override') === false) {
-    $OUT->_display();
+	$OUT->_display();
 }
 
 /*
